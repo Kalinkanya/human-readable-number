@@ -1,8 +1,7 @@
-const numberToWords = require('number-to-words');
+import { toWords } from 'number-to-words';
 
-module.exports = function toReadable(number) {
-  return numberToWords
-    .toWords(number)
+export default function toReadable(number) {
+  return toWords(number)
     .replace(/-/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
