@@ -1,3 +1,9 @@
-module.exports = function toReadable(/* number */) {
-  throw new Error('Not implemented');
+const numberToWords = require('number-to-words');
+
+module.exports = function toReadable(number) {
+  return numberToWords
+    .toWords(number)
+    .replace(/-/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 };
