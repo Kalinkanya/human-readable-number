@@ -1,6 +1,5 @@
 module.exports = function toReadable(number) {
   if (number === 0) return 'zero';
-
   const units = [
     '',
     'one',
@@ -37,17 +36,12 @@ module.exports = function toReadable(number) {
     'eighty',
     'ninety',
   ];
-
   const result = [];
-
-  // Handle hundreds place
   const hundreds = Math.floor(number / 100);
   if (hundreds > 0) {
     result.push(`${units[hundreds]} hundred`);
   }
-
-  // Handle tens and units
-  const remainder = number % 100;
+ const remainder = number % 100;
   if (remainder >= 20) {
     result.push(tens[Math.floor(remainder / 10)]);
     if (remainder % 10 !== 0) {
@@ -58,6 +52,5 @@ module.exports = function toReadable(number) {
   } else if (remainder > 0) {
     result.push(units[remainder]);
   }
-
   return result.join(' ');
 };
