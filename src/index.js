@@ -41,7 +41,7 @@ module.exports = function toReadable(number) {
   if (hundreds > 0) {
     result.push(`${units[hundreds]} hundred`);
   }
- const remainder = number % 100;
+  const remainder = number % 100;
   if (remainder >= 20) {
     result.push(tens[Math.floor(remainder / 10)]);
     if (remainder % 10 !== 0) {
