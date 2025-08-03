@@ -1,5 +1,6 @@
 module.exports = function toReadable(number) {
   if (number === 0) return 'zero';
+
   const units = [
     '',
     'one',
@@ -36,21 +37,29 @@ module.exports = function toReadable(number) {
     'eighty',
     'ninety',
   ];
-  const result = [];
-  const hundreds = Math.floor(number / 100);
-  if (hundreds > 0) {
-    result.push(`${units[hundreds]} hundred`);
-  }
-  const remainder = number % 100;
-  if (remainder >= 20) {
-    result.push(tens[Math.floor(remainder / 10)]);
-    if (remainder % 10 !== 0) {
-      result.push(units[remainder % 10]);
+
+  const result = (() => {
+    const parts = [];
+    let num = number;
+
+    if (num >= 100) {
+      parts.push(`${units[Math.floor(num / 100)]} hundred`);
+      num %= 100;
     }
-  } else if (remainder >= 10) {
-    result.push(teens[remainder - 10]);
-  } else if (remainder > 0) {
-    result.push(units[remainder]);
-  }
+
+    if (num >= 20) {
+      parts.push(tens[Math.floor(num / 10)]);
+      if (num % 10 !== 0) {
+        parts.push(units[num % 10]);
+      }
+    } else if (num >= 10) {
+      parts.push(teens[num - 10]);
+    } else if (num > 0) {
+      parts.push(units[num]);
+    }
+
+    return parts;
+  })();
+
   return result.join(' ');
 };
